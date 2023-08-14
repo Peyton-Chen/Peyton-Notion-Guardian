@@ -47,3 +47,4 @@ jobs:
           fi
           git commit -m "Automated Notion workspace backup"
           git push
+
