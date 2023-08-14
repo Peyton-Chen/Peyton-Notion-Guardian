@@ -42,7 +42,7 @@ jobs:
           git config --local user.email "${REPO_EMAIL}"
           git config --local user.name "${REPO_USERNAME}"
           git lfs install
-          git lfs track ".zip"
+          git lfs track "*.zip"
           git add .gitattributes
           git add .
           if [ -z "$(git status --porcelain)" ]; then
