@@ -49,6 +49,7 @@ const exportFromNotion = async (destination, format) => {
   console.log(`Started Export as task [${taskId}].\n`);
 
   let exportURL;
+  let fileTokenCookie;
   while (true) {
     await sleep(2);
     const {
@@ -65,6 +66,9 @@ const exportFromNotion = async (destination, format) => {
 
     if (task.state === `success`) {
       exportURL = task.status.exportURL;
+      fileTokenCookie = getTasksRequestCookies.find((cookie) =>
+        cookie.includes("file_token="),
+      );
       console.log(`\nExport finished.`);
       break;
     }
@@ -74,6 +78,9 @@ const exportFromNotion = async (destination, format) => {
     method: `GET`,
     url: exportURL,
     responseType: `stream`,
+    headers: {
+      Cookie: fileTokenCookie,
+    },
   });
 
   const size = response.headers["content-length"];
