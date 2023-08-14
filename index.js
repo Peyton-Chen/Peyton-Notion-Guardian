@@ -54,6 +54,7 @@ const exportFromNotion = async (destination, format) => {
     await sleep(2);
     const {
       data: { results: tasks },
+      headers: { 'set-cookie': getTasksRequestCookies },
     } = await client.post(`getTasks`, { taskIds: [taskId] });
     const task = tasks.find((t) => t.id === taskId);
 
